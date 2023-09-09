@@ -77,4 +77,6 @@ saveRDS(DH1,"C:/Users/DELL/.../DH_S11.rds")
 #the same calculation of ENA and DH was repeated for the other stations, 
 #each time replacing S1.X  and S1.lim by S2.X / S2.lim then S3.X/S3/lim then S4.X/S4.lim
 ```
-![](/ENA_indices.jpg)
+<p>
+    <img src="/ENA_indices.jpg" width="220" height="240" />
+</p>
