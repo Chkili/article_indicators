@@ -131,7 +131,46 @@ saveRDS(DH1,"C:/Users/DELL/.../DH_S11.rds")
 
 #the same calculation of ENA and DH was repeated for the other stations, each time replacing S1.X  and S1.lim by S2.X / S2.lim then S3.X/S3/lim then S4.X/S4.lim
   ```
+##Plot indices
+```R
+ENA.S1<-gather(ENA.S1, indices)%>%
+  mutate( web="S1")
+DH1<-gather(DH1, indices)%>%
+  mutate( web="S1")
 
+ENA.S2<-gather(ENA.S2, indices)%>%
+  mutate( web="S2")
+DH2<-gather(DH2, indices)%>%
+  mutate( web="S2")
+#ENAS2<- rbind(ENA.S2,DH2)
+
+ENA.S3<-gather(ENA.S3, indices)%>%
+  mutate( web="S3")
+DH3<-gather(DH3, indices)%>%
+  mutate( web="S3")
+#ENAS3<- rbind(ENA.S3,DH3)
+
+ENA.S4<-gather(ENA.S4, indices)%>%
+  mutate( web="S4")
+DH4<-gather(DH4, indices)%>%
+  mutate( web="S4")
+#ENAS4<- rbind(ENA.S4,DH4)
+
+
+IND_ENA<-bind_rows(ENA.S1,ENA.S2,ENA.S3,ENA.S4)
+IND_ENA2<-bind_rows(DH1,DH2,DH3,DH4)
+IND_ENA22<-bind_rows(IND_ENA,IND_ENA2)
+
+
+
+X<-filter(IND_ENA22_bac,indices %in% c("TST", "AMI", "APL", "FCI","ACratio","DH"))%>%
+  mutate(indices=as.factor(indices))
+
+p<-ggplot(data=X,aes(x=web,y=value))
+p+geom_boxplot()+theme_classic()+facet_wrap(~indices,scale="free")+
+  theme(strip.text.x=element_text(size=16), axis.text.x = element_text(size=13), axis.text.y = element_text(size=13), axis.title =element_text(size=16))+
+  labs(x="Web",y="values")
+```
 ![ENA_indices](https://github.com/Chkili/article_indicators/blob/main/ENA_indices.jpg)
  
  Spatial variation of ENA indices calculated for the planktonic food webs in four stations of the Gulf of Gabès. Total system throughput (TST; mg C m−2 d−1) (A), relative ascendancy (A/C; %) (B), average mutual information (AMI; bits) (C), average path length (APL) (D), cycling index (FCI; %) (E), and detritivory to herbivory (D/H) (F).]
