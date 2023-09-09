@@ -32,6 +32,7 @@ library(stringr)
 ```
 
 ## Calculation of the unknown fluxes
+
 In our study, four food web typology ratios of Sakka Hlaili et al. (2014)  were calculated from the flux data yielded by the models to describe the different interactions between compartments and identify the type of trophic pathway.
 ```R
  #to set which directory you want to work in: source path
