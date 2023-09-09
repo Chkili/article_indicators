@@ -1,0 +1,177 @@
+################################
+Golfe of Gabes
+
+station 4
+
+Juin 2021
+
+FLOW:
+source ->sink or flow(source,sink)
+in mg.C.m-2.day-1
+################################
+##COMPONENTS
+
+mic ! microphytoplankton
+nan ! nanophytoplankton
+pic ! picophytoplankton
+bac ! bacteria
+pro ! protozooplankton
+mes ! mesozooplankton
+det ! detritus
+doc ! dissolved organic carbon
+
+##END COMPONENTS
+
+##EXTERNAL
+
+gpp  ! gross primary production
+res  ! respiration
+los  ! sinking
+
+##END EXTERNAL
+
+##FLOWS
+
+gpp -> mic
+gpp -> nan
+gpp -> pic
+
+mic -> res
+mic -> doc
+mic -> det
+mic -> pro
+mic -> mes
+mic -> los
+
+nan -> res 
+nan -> doc
+nan -> det
+nan -> pro
+nan -> mes
+nan -> los
+
+pic -> res
+pic -> doc
+pic -> pro
+
+pro -> res
+pro -> doc
+pro -> det
+pro -> mes
+
+mes -> res
+mes -> doc
+mes -> det
+mes -> los
+
+bac -> res
+bac -> doc
+bac -> pro
+
+doc -> bac
+doc -> los
+
+det -> doc
+det -> mes
+det -> los
+
+##END FLOWS
+
+##VARIABLES ! you write variables to facilitate the writing of inequalities
+
+NPPmic =  flow(gpp,mic)-flow(mic,res)
+NPPnan =  flow(gpp,nan)-flow(nan,res)
+NPPpic =  flow(gpp,pic)-flow(pic,res)
+nppmicmicnanpic = NPPmic+NPPnan+NPPpic
+RESmic =  flow(mic,res)
+RESnan =  flow(nan,res)
+RESpic =  flow(pic,res) 
+EXUmic =  flow(mic,doc)
+EXUnan =  flow(nan,doc)
+EXUpic =  flow(pic,doc)
+EXUPHYT = EXUmic+EXUnan+EXUpic
+GRAZmic = flow(mic,pro)+flow(mic,mes)
+GRAZnan = flow(nan,pro)+flow(nan,mes)
+GRAZpic = flow(pic,pro)
+
+
+REALYPTAKEdoc 	= flow(doc,bac) 
+UPTAKEdoc    	= flow(doc,bac)-flow(bac,doc)
+RESbac      	= flow(bac,res)
+PB          	= uptakedoc-resbac
+EXUbac      	= flow(bac,doc)
+GRAZbac         = flow(bac,pro)
+EFFGROWTHbac    = REALYPTAKEdoc-RESbac-EXUbac
+
+CONSOpro = flow(mic,pro)+flow(nan,pro)+flow(pic,pro)+ flow(bac,pro)
+RESpro  = flow(pro,res)
+EXCRETpro  = flow(pro,doc)
+EGESpro = flow(pro,det)
+predpro = flow(pro,mes)
+EFFGROWTHpro = CONSOpro-RESpro-EGESpro-EXCRETpro
+ASSpro  = CONSOpro-EGESpro
+
+CONSOmes = flow(mic,mes)+flow(nan,mes)+flow(pro,mes)+flow(det,mes)
+CONSOnanprodet = flow(nan,mes)+flow(pro,mes)+flow(det,mes)
+CONSOmicprodet = flow(mic,mes)+flow(pro,mes)+flow(det,mes)
+CONSOmicnandet = flow(mic,mes)+flow(nan,mes)+flow(det,mes)
+CONSOmicnanpro = flow(mic,mes)+flow(nan,mes)+flow(pro,mes)
+CONSOPHYTmes = flow(mic,mes)+flow(nan,mes)
+RESmes  = flow(mes,res)
+EXCRETmes  = flow(mes,doc)
+EGESmes = flow(mes,det)
+EFFGROWTHmes = CONSOmes-RESmes-EGESmes-EXCRETmes
+ASSmes  = CONSOmes-EGESmes
+DEGRAdetdoc = flow(det,doc)
+GRAZdet = flow(det,mes)
+##END VARIABLES
+
+##EQUALITIES
+
+
+##END EQUALITIES
+
+##INEQUALITIES
+
+flow(gpp,mic) = [2043.619,2497.757]
+flow(gpp,nan) = [1171.717,1432.098] 
+flow(gpp,pic) = [284.545,347.778]
+flow(mic,pro) = [943.895,1153.649]
+flow(mic,los) = [274.633,335.663]
+flow(nan,pro) = [285.962,349.509]
+flow(nan,los) = [0.441,0.539] 
+CONSOPHYTmes  = [714.854,873.710]
+flow(pic,pro) = [123.753,151.254]flow(doc,bac) = [656.697,802.630]flow(bac,pro) = [340.245,415.855]
+flow(mes,det) > 34.289
+flow(det,los) = [945.558,1155.683]
+RESmic		= [0.05,0.3]*flow(gpp,mic)
+RESnan		= [0.05,0.3]*flow(gpp,nan)
+RESpic		= [0.05,0.3]*flow(gpp,pic)
+RESbac          > 0.2*REALYPTAKEdoc
+RESpro          > 0.2*CONSOpro
+RESmes          > 0.2*CONSOmes
+
+EXUmic          = [0.1,0.33]*NPPmic
+EXUnan          = [0.1,0.33]*NPPnan
+EXUpic          = [0.1,0.33]*NPPpic
+EXCRETpro       > 0.1* CONSOpro
+EXCRETpro       < RESpro
+EXCRETmes       > 0.1*CONSOmes
+EXCRETmes       < RESmes
+EXUbac          < RESbac
+
+EFFGROWTHpro    = [0.25,0.5]*CONSOpro
+EFFGROWTHmes    = [0.25,0.5]*CONSOmes
+EFFGROWTHbac    = [0.05,0.5]*REALYPTAKEdoc
+
+
+0.95*EGESpro > 0.05*RESpro
+0.58*EGESpro < 0.42*RESpro
+
+0.95*EGESmes > 0.05*RESmes
+0.58*EGESmes < 0.42*RESmes
+
+ASSpro = [0.5,0.9]*CONSOpro
+ASSmes = [0.5,0.9]*CONSOmes0.62*flow(mic,mes) < 0.38*CONSOnanprodet0.94*flow(nan,mes) < 0.06*CONSOmicprodet0.60*flow(pro,mes) < 0.40*CONSOmicnandet0.84*flow(det,mes) < 0.16*CONSOmicnanpro
+
+##END INEQUALITIES
