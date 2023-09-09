@@ -3,10 +3,10 @@ This R script comes with the following research article:
 It includes (i) a procedure for calculation of the unknown fluxes using the LIM-MCMC method based on the mirror technique defined by Meersche et al. (2009) estimates each unknown flux, (ii) a procedure for estimating ENA indicators and typology ratios and (iv) procedure to create a Multiple Factor Analysis (MFA) Ordination Diagram showing the relationships between ecological indicators, environmental variables and carbon fluxes.
 
 ## Data_matrix
-[Station1-S1]([https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S1_mod.txt))
-[Station2-S2]([https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S2_mod.txt))
-[Station3-S3]([https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S3_mod.txt))
-[Station4-S4]([https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S4_mod.txt))
+[Station1-S1](https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S1_mod.txt)
+[Station2-S2](https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S2_mod.txt)
+[Station3-S3](https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S3_mod.txt)
+[Station4-S4](https://www.google.com](https://github.com/Chkili/article_indicators/blob/main/S4_mod.txt)
 
 ## Load required libraries
 ```R
