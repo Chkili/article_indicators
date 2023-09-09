@@ -113,13 +113,9 @@ S1.lim$NComponents
 
 S1.ENA<-Indices(S1.lim, S1.X, ext=c("gpp","res","los"),dead=c(7,8), specs=c(5,6))
 
-saveRDS(S1.ENA, file="C:/Users/DELL/..../S1_ENA.rds")
-
-
 
 
 ##calculation of detritivory/herbivory indice##
-  
   
   DH <-numeric(nrow(S1.X))
 
@@ -133,9 +129,10 @@ DH1<-as.data.frame(DH)
 summary(DH1)
 saveRDS(DH1,"C:/Users/DELL/.../DH_S11.rds")
 
-#the same calculation of ENA and DH was repeated for the other stations, 
-#each time replacing S1.X  and S1.lim by S2.X / S2.lim then S3.X/S3/lim then S4.X/S4.lim
+#the same calculation of ENA and DH was repeated for the other stations, each time replacing S1.X  and S1.lim by S2.X / S2.lim then S3.X/S3/lim then S4.X/S4.lim
   ```
+
+![ENA_indices](https://github.com/Chkili/article_indicators/blob/main/ENA_indices.jpg)
   
  
 
