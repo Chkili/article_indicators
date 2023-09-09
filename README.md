@@ -134,7 +134,7 @@ saveRDS(DH1,"C:/Users/DELL/.../DH_S11.rds")
 
 ![ENA_indices](https://github.com/Chkili/article_indicators/blob/main/ENA_indices.jpg)
  
-![ENA_indices][Spatial variation of ENA indices calculated for the planktonic food webs in four stations of the Gulf of Gabès. Total system throughput (TST; mg C m−2 d−1) (A), relative ascendancy (A/C; %) (B), average mutual information (AMI; bits) (C), average path length (APL) (D), cycling index (FCI; %) (E), and detritivory to herbivory (D/H) (F).]
+ Spatial variation of ENA indices calculated for the planktonic food webs in four stations of the Gulf of Gabès. Total system throughput (TST; mg C m−2 d−1) (A), relative ascendancy (A/C; %) (B), average mutual information (AMI; bits) (C), average path length (APL) (D), cycling index (FCI; %) (E), and detritivory to herbivory (D/H) (F).]
   
  
 
