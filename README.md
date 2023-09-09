@@ -32,6 +32,7 @@ library(stringr)
 ```
 
 ## Calculation of the unknown fluxes
+In our study, four food web typology ratios of Sakka Hlaili et al. (2014)  were calculated from the flux data yielded by the models to describe the different interactions between compartments and identify the type of trophic pathway.
 ```R
  #to set which directory you want to work in: source path
 setwd("C:/Users/...") 
@@ -50,6 +51,49 @@ webranges<- Xranges(S1.lim)
 
 # calculation of random solution jump=10 iter=300000
 S1.X<-Xsample(S1.lim,iter=300000,jmp=10) 
+```
+## Calculation of Food web typology ratios 
+``` R
+#typology ratios have been calculated from certain Xsample flows
+
+
+S1<- S1.X #x.sample
+
+phytTOpro<- S1[,7]+S1[,13]+S1[,18]
+D1<- phytTOpro+ S1[,29]
+
+GPPphyt<-S1[,1]+S1[,2]+S1[,3]
+resphyt<-S1[,4]+S1[,10]+S1[,16]
+
+Pnet_phyt<- GPPphyt-resphyt
+Pnet_bac<-S1[,30]- S1[,27]
+Pnet_doc<- S1[,5]+S1[,11]+S1[,17]+S1[,20]+S1[,24]+S1[,28]+S1[,32]
+Pnet_det<-S1[,6]+S1[,12]+S1[,21]+S1[,25]
+D2<- Pnet_phyt+Pnet_bac+Pnet_doc+Pnet_det
+R4<- Pnet_phyt/D2           
+summary(R4)
+
+
+#R6=(Pnetdet + Pnetdoc) /(Pnetpht + Pnetbac + Pnetdet + Pnetdoc)
+R6<-(Pnet_det + Pnet_doc)/D2
+summary(R6)
+
+#R7=Pnetpico/Pnetpht
+Pnet_pico<- S1[,3]-S1[,16]
+R7<-Pnet_pico/Pnet_phyt
+summary(R7)
+
+#R8=phtTOpro/ (phtTOpro + phtTOmet)
+phytTOmet<- S1[,8]+S1[,14]
+R8<- phytTOpro/(phytTOpro+phytTOmet)
+summary(R8)
+########################
+#summary ratio##########
+########################
+summary(R4)
+summary(R6)
+summary(R7)
+summary(R8)
 ```
 ## Calculation of ENA indices
 
@@ -174,6 +218,8 @@ p+geom_boxplot()+theme_classic()+facet_wrap(~indices,scale="free")+
 ![ENA_indices](https://github.com/Chkili/article_indicators/blob/main/ENA_indices.jpg)
  
  Spatial variation of ENA indices calculated for the planktonic food webs in four stations of the Gulf of Gabès. Total system throughput (TST; mg C m−2 d−1) (A), relative ascendancy (A/C; %) (B), average mutual information (AMI; bits) (C), average path length (APL) (D), cycling index (FCI; %) (E), and detritivory to herbivory (D/H) (F).]
+
+ 
   
  
 
