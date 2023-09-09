@@ -9,8 +9,8 @@ It includes (i) a procedure for calculation of the unknown fluxes using the LIM-
 [Station4-S4](https://www.google.com)
 
 ## Load required libraries
-
-`library(LIM)
+```R
+library(LIM)
 library(limSolve)
 library(diagram)
 library (shape)
@@ -25,7 +25,8 @@ library(qgraph)
 library(igraph)
 library("ggplot2")
 library(effsize)
-library(stringr)`
+library(stringr)
+```
 
 ## Calculation of the unknown fluxes
 ```R
