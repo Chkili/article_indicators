@@ -318,6 +318,10 @@ saveRDS(S1_S2_ENA_Cliff, file="C:/Users/DELL/Documents/Ancien/modelisation gabes
 
 A multiple factor analysis (MFA) was performed to identify the interrelationships between different ecological indicators (food web typology ratios and ENA indices) as well as environmental variables (inorganic and organic nutrients) and some of the calculated fluxes (GPP of PIC, NAN and MIC, bacterial production and sinking of NAN, MIC and MET). 
 
+#### Environmental data
+[Environmental data](https://github.com/Chkili/article_indicators/blob/main/envi_golfe.rds)
+<br>
+
 ``` R
 calculation of 3000 randomly selected values LIM solutions 
 
