@@ -269,6 +269,9 @@ p+geom_boxplot()+theme_classic()+facet_wrap(~indices,scale="free")+
  Spatial variation of ENA indices calculated for the planktonic food webs in four stations of the Gulf of Gabès. Total system throughput (TST; mg C m−2 d−1) (A), relative ascendancy (A/C; %) (B), average mutual information (AMI; bits) (C), average path length (APL) (D), cycling index (FCI; %) (E), and detritivory to herbivory (D/H) (F).]
 
 ##Calculation of Delta Cliff
+
+The Cliff’s δ test was used to statistically test indices differences between models.
+
 ```R
 S1<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/ENA/S1_RES.ENA.rds")
 S2<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/ENA/S2_RES.ENA.rds")
@@ -311,6 +314,86 @@ for (c in 1 : 5){ # choisir les colonnes que tu veux (les ENA)
 
 saveRDS(S1_S2_ENA_Cliff, file="C:/Users/DELL/Documents/Ancien/modelisation gabes/Cliff/S1_S2_ENA_Cliff.rds")
 ```
+##Calculation of Multiple factor analysis (MFA)
+
+A multiple factor analysis (MFA) was performed to identify the interrelationships between different ecological indicators (food web typology ratios and ENA indices) as well as environmental variables (inorganic and organic nutrients) and some of the calculated fluxes (GPP of PIC, NAN and MIC, bacterial production and sinking of NAN, MIC and MET). 
+
+``` R
+calculation of 3000 randomly selected values LIM solutions 
+
+filesr   = list.files("C:/Users/DELL/Documents/Ancien/modelisation gabes/MFA/new_mfa_aleat_env/new_new", pattern = "_variables.rds", full.names = TRUE)
+
+
+S1<-c(1:300000)
+indice<-sample(S1,size=3000,replace=FALSE)
+S1<-setdiff(S1,indice)
+indice2<-sample(S1,3000)
+S1<-setdiff(S1,indice2)
+indice3<-sample(S1,3000)
+i=1
+for (i in 1:length(filesr)){
+  print(i)
+  fa<-filesr[i] 
+  mat=readRDS(fa)
+  name = sub("_variables","",tools::file_path_sans_ext(basename(fa)))
+  data<-as.data.frame(mat[indice,]) 
+ 
+  
+  data<-select(data,  c("gpp->mic","gpp->nan","gpp->pic","doc->bac","mic->los","nan->los","mes->los","R4","R6","R7","R8","TST","AMI","APL","DH","FCI","ACratio","Ninorg","Norg","Pinorg","Porg","SiOH"))%>%
+    mutate(eco=str_extract(name,"^[^_]*")) 
+  
+  if (i>1){
+    dataa<-rbind(dataa,data)
+  } else{
+    dataa<-data
+  }
+  rm(data)
+}
+
+
+##plot_MFA##
+
+#plot-variables
+  
+  varr<- dataa
+  colnames(varr)
+  res.mfa <- MFA(varr, 
+                 group = c(3,1,3,4,6,5,1),
+                 type = c("s","s","s","s","s","s","n"),
+                 name.group = c("primary_prod", "bacprod","Export","Ratio","ENA","Env","web"),
+                 num.group.sup = NULL,
+                 graph = FALSE)
+  
+  print(res.mfa)
+  
+  
+  va<- res.mfa$quanti.var   ; va
+  vaa<-va$contrib         ; vaa
+  #vaaa<-vaa$col.abs     ; vaaa
+  #fviz_mfa_var(res.mfa, repel= TRUE)
+  X11();plot(res.mfa,choix="var",axes = c(1,2),cex=1,repel=TRUE)
+  
+  
+  #plot_station#
+  
+  Systeme<-as.factor(c(rep("S1",3000),rep("S2",3000),rep("S3",3000),rep("S4",3000)))
+  head(Systeme)
+  par(mfrow=c(1,3))
+  #s.class(res.mfa$ind$coord[,1:2],fac=Systeme)
+  X11();s.class(res.mfa$ind$coord[,c(1,2)], fac=Systeme ,xax = 1, yax = 2,cstar = 1,
+                cellipse = 3, axesell = TRUE,  
+                cpoint = 1,col=c("#00AFBB", "#E7B800", "#CC79A7","#52854C"), 
+                pch = 20)
+  group <- get_mfa_var(res.mfa, "quanti.var")
+```
+![MFA](https://github.com/Chkili/article_indicators/blob/main/MFA..jpg)
+Multiple factor analysis (MFA) ordination diagram showing the relationships between ecological indicators (food web typology ratios and ENA indices), environmental variables (inorganic and organic nutrients: Ninorg, Pinorg, Siinorg, Norg, Porg) and carbon flows [GPP of PIC (GPP->PIC), NAN (GPP->NAN) and MIC (GPP->MIC), bacterial production (DOC->BAC) and sinking of NAN (NAN->LOS), MIC (MIC->LOS) and MET (MET->LOS)]. 
+
+  
+  
+ 
+
+
 
   
  
