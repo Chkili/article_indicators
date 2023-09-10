@@ -268,7 +268,7 @@ p+geom_boxplot()+theme_classic()+facet_wrap(~indices,scale="free")+
  
  Spatial variation of ENA indices calculated for the planktonic food webs in four stations of the Gulf of Gabès. Total system throughput (TST; mg C m−2 d−1) (A), relative ascendancy (A/C; %) (B), average mutual information (AMI; bits) (C), average path length (APL) (D), cycling index (FCI; %) (E), and detritivory to herbivory (D/H) (F).]
 
-##Calculation of Delta Cliff
+## Calculation of Delta Cliff
 
 The Cliff’s δ test was used to statistically test indices differences between models.
 
@@ -314,7 +314,7 @@ for (c in 1 : 5){ # choisir les colonnes que tu veux (les ENA)
 
 saveRDS(S1_S2_ENA_Cliff, file="C:/Users/DELL/Documents/Ancien/modelisation gabes/Cliff/S1_S2_ENA_Cliff.rds")
 ```
-##Calculation of Multiple factor analysis (MFA)
+## Calculation of Multiple factor analysis (MFA)
 
 A multiple factor analysis (MFA) was performed to identify the interrelationships between different ecological indicators (food web typology ratios and ENA indices) as well as environmental variables (inorganic and organic nutrients) and some of the calculated fluxes (GPP of PIC, NAN and MIC, bacterial production and sinking of NAN, MIC and MET). 
 
