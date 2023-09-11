@@ -273,15 +273,15 @@ p+geom_boxplot()+theme_classic()+facet_wrap(~indices,scale="free")+
 The Cliff’s δ test was used to statistically test indices differences between models.
 
 ```R
-S1<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/ENA/S1_RES.ENA.rds")
-S2<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/ENA/S2_RES.ENA.rds")
-S2<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/ENA/S2_RES.ENA.rds")
-S1<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/ENA/S1_RES.ENA.rds")
+S1<-readRDS("C:/Users/..../S1_RES.ENA.rds")
+S2<-readRDS("C:/Users/..../S2_RES.ENA.rds")
+S2<-readRDS("C:/Users/..../S2_RES.ENA.rds")
+S1<-readRDS("C:/Users/..../S1_RES.ENA.rds")
 
-DH1<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/DH/resultS200000/DH1.rds")
-DH2<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/DH/resultS200000/DH2.rds")
-DH3<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/DH/resultS200000/DH3.rds")
-DH4<-readRDS("C:/Users/DELL/Documents/Ancien/modelisation gabes/DH/resultS200000/DH4.rds")
+DH1<-readRDS("C:/Users/..../DH1.rds")
+DH2<-readRDS("C:/Users/..../DH2.rds")
+DH3<-readRDS("C:/Users/..../DH3.rds")
+DH4<-readRDS("C:/Users/..../DH4.rds")
 
 df_S1 <- S1$Sub[,c(1,6,7,15,16)]
 df_S1 <- as.data.frame(df_S1)
@@ -312,7 +312,7 @@ for (c in 1 : 5){ # choisir les colonnes que tu veux (les ENA)
   assign(paste0("S1_S2_ENA_Cliff"), r2) # la tu cr�er une dataframe avec tes resultats
 }
 
-saveRDS(S1_S2_ENA_Cliff, file="C:/Users/DELL/Documents/Ancien/modelisation gabes/Cliff/S1_S2_ENA_Cliff.rds")
+saveRDS(S1_S2_ENA_Cliff, file="C:/Users/..../S1_S2_ENA_Cliff.rds")
 ```
 ## Calculation of Multiple factor analysis (MFA)
 
@@ -325,7 +325,7 @@ A multiple factor analysis (MFA) was performed to identify the interrelationship
 ``` R
 calculation of 3000 randomly selected values LIM solutions 
 
-filesr   = list.files("C:/Users/DELL/Documents/Ancien/modelisation gabes/MFA/new_mfa_aleat_env/new_new", pattern = "_variables.rds", full.names = TRUE)
+filesr   = list.files("C:/Users/....", pattern = "_variables.rds", full.names = TRUE)
 
 
 S1<-c(1:300000)
